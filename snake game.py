@@ -24,7 +24,7 @@ CELL_SIZE     = 30          # Each grid square is 30x30 pixels
 GRID_COLS = WINDOW_WIDTH  // CELL_SIZE
 GRID_ROWS = WINDOW_HEIGHT // CELL_SIZE
 
-FPS = 2                   # Frames per second — controls game speed
+FPS = 3.5                   # Frames per second — controls game speed
 
 # Colours (Red, Green, Blue) — values from 0 to 255
 BLACK      = (  0,   0,   0)
@@ -120,7 +120,7 @@ def move_snake(snake, direction):
     new_head = (head_col + dc, head_row + dr)
 
     snake.insert(0, new_head)
-    snake.pop()             # comment this line out — watch what happens!
+    snake.pop()         # comment this line out — watch what happens!
 
     return new_head
 
@@ -208,10 +208,10 @@ def handle_direction_change(event, current_direction):
     opposite = {UP: DOWN, DOWN: UP, LEFT: RIGHT, RIGHT: LEFT}
 
     key_map = {
-        pygame.K_UP:    UP,
-        pygame.K_DOWN:  DOWN,
-        pygame.K_LEFT:  LEFT,
-        pygame.K_RIGHT: RIGHT,
+        pygame.K_w:    UP,
+        pygame.K_s:  DOWN,
+        pygame.K_a:  LEFT,
+        pygame.K_d: RIGHT,
     }
 
     if event.key in key_map:
@@ -233,7 +233,7 @@ def show_game_over(surface, score, font_big, font_small):
 
     msg1 = font_big.render("GAME OVER", True, RED)
     msg2 = font_small.render(f"Score: {score}", True, WHITE)
-    msg3 = font_small.render("Press R to restart  |  Q to quit", True, GRAY)
+    msg3 = font_small.render("Press R to restart  |  Q to quit", True, WHITE)
 
     surface.blit(msg1, msg1.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 - 60)))
     surface.blit(msg2, msg2.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + 10)))
