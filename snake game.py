@@ -10,21 +10,22 @@ print("Helloooooo")
 
 import pygame
 import random
+import sys
 
 # -----------------------------------------------------------------------------
 # MILESTONE 1 — CONSTANTS (the settings of our game world)
 # -----------------------------------------------------------------------------
 # TODO: Try changing these values and see what happens!
 
-WINDOW_WIDTH  = 600
-WINDOW_HEIGHT = 600
-CELL_SIZE     = 30          # Each grid square is 30x30 pixels
+WINDOW_WIDTH  = 800
+WINDOW_HEIGHT = 800
+CELL_SIZE     = 25          # Each grid square is 30x30 pixels
 
 # How many cells fit across/down the grid?
 GRID_COLS = WINDOW_WIDTH  // CELL_SIZE
 GRID_ROWS = WINDOW_HEIGHT // CELL_SIZE
 
-FPS = 3.5                   # Frames per second — controls game speed
+FPS = 7               # Frames per second — controls game speed
 
 # Colours (Red, Green, Blue) — values from 0 to 255
 BLACK      = (  0,   0,   0)
@@ -260,10 +261,10 @@ def show_game_over(surface, score, font_big, font_small):
 def main():
     pygame.init()
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-    pygame.display.set_caption("🐍 Snake")
+    pygame.display.set_caption("Snake Game")
     clock = pygame.time.Clock()
 
-    font_big   = pygame.font.SysFont("monospace", 52, bold=True)
+    font_big   = pygame.font.SysFont("monospace", 60, bold = True)
     font_small = pygame.font.SysFont("monospace", 26)
 
     # ── Game state ──────────────────────────────────────────────────────────
@@ -273,23 +274,24 @@ def main():
     start_row = GRID_ROWS // 2
     snake     = [(start_col, start_row),
                  (start_col - 1, start_row),
-                 (start_col - 2, start_row)]
+                 (start_col - 2, start_row),
+                 (start_col - 3, start_row),]
 
     direction = (1, 0)      # starting direction: RIGHT
     food      = spawn_food(snake)
     score     = 0
     running   = True
-
+    
     # ── Game loop ────────────────────────────────────────────────────────────
     while running:
-
+       
         # 1. HANDLE EVENTS (keyboard, window close)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
                 direction = handle_direction_change(event, direction)
-
+        
         # 2. UPDATE GAME STATE
         if food == snake[0]:
             # TODO: Why do we check BEFORE moving? Try moving this check
@@ -325,6 +327,7 @@ def main():
         clock.tick(FPS)
 
     pygame.quit()
+    sys.exit()
 
 
 # -----------------------------------------------------------------------------
